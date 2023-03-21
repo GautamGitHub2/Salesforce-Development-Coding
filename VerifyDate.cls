@@ -1,3 +1,5 @@
+***** VerifyDate *****
+
 public class VerifyDate {
 	
 	//method to handle potential checks against two dates
@@ -29,3 +31,15 @@ public class VerifyDate {
 	}
 
 }
+
+***** TestVerifyDate ****
+
+@isTest
+private class TestVerifyDate {
+    
+    @isTest static void testCheckDates(){
+        VerifyDate.CheckDates(System.today(), System.today().addDays(15));
+        VerifyDate.CheckDates(System.today(), System.today().addDays(75));
+    }
+}
+
