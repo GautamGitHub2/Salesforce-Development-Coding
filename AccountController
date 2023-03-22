@@ -1,0 +1,50 @@
+
+***** AccountController *****
+
+public with sharing class AccountController {
+    
+    public String searchText{get;set;}
+    public List<Account> accList{get;set;}
+    
+    public AccountController()
+    { }
+    
+    public void search()
+    {
+        searchText = searchText+'%';
+        
+        accList = [Select Name,AccountNumber,NumberOfEmployees,Type,Active__c,Phone from Account where Name Like :searchText];
+    }  
+}
+
+/*
+So as of now when the user hit on the search button the results get displayed. and if i search different records then it will reload the page and display other records.
+
+Q. Write the visualforce code so that when user hit on the Search button only search results get changed/ re-rendered not all the page reloaded.
+Ans. for this i have to define an id="aTable" section inside the visualforce coding page apex:pageBlockSection -> apex:pageBlockTable  
+
+this id="aTable" attribute is defined a single tag or single component uniquely in the complete code that defines the complete page block table here in this case 'accList'  
+
+<apex:pageBlockSection>
+<apex:pageBlockTable value="{!accList}" var="a" id="aTable">
+
+after that i have to re-render this id="aTable" inside the apex:pageBlockButtons -> apex:commandButton  
+
+<apex:pageBlockButtons location="bottom">              
+<apex:commandButton action="{!search}" value="Search" reRender="aTable"/>
+</apex:pageBlockButtons>
+
+it will basically not reload the entire search page but it will re-render the search results.
+
+and finaly save the visualforce page.
+
+now try to search any account records, it will not reload the entire page only results will be changed. 
+
+Q. Write the visualforce code so that the page list results will display in PDF format.
+Ans. For this i have to use the keyword renderAs="pdf" inside the apex:page
+
+<apex:page controller="CandidateExtension" renderAs="pdf">
+
+save the visualforce coding page, now the records list results will display in PDF format.
+
+*/
