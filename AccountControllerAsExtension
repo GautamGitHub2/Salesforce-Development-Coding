@@ -1,0 +1,16 @@
+****** AccountControllerAsExtension *****
+public class AccountControllerAsExtension {
+    
+    public List<Account> accList{get;set;}
+    
+    public AccountControllerAsExtension(ApexPages.StandardController s)
+    {
+      accList = [Select Name,AccountNumber,NumberOfEmployees,Type,Active__c,Phone from Account order by name];  
+    }
+        
+    public AccountControllerAsExtension(CandidateCreateCustomController cccc)
+    {
+      accList = [Select Name,AccountNumber,NumberOfEmployees,Type,Active__c,Phone from Account order by name];  
+    }   
+       
+}
